@@ -49,8 +49,6 @@ app.get('/health', (req, res) => {
     res.json({ status: 'OK', timestamp: new Date().toISOString() })
 })
 
-
-
 // Upload endpoint
 app.post('/upload', uploadLimiter, upload.single('file'), async (req, res) => {
     try {
@@ -95,7 +93,7 @@ app.post('/upload', uploadLimiter, upload.single('file'), async (req, res) => {
 
         // Generate preview URL
         const bucketName = process.env.B2_BUCKET_NAME
-        const previewUrl = `https://f005.backblazeb2.com/file/${bucketName}/${fileName}`
+        const previewUrl = `https://images.d.buzz/file/${bucketName}/${fileName}`
 
         res.json({
             success: true,
@@ -118,8 +116,6 @@ app.post('/upload', uploadLimiter, upload.single('file'), async (req, res) => {
         })
     }
 })
-
-
 
 // Error handling middleware
 app.use((error, req, res, next) => {
