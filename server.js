@@ -7,7 +7,7 @@ const rateLimit = require('express-rate-limit')
 require('dotenv').config()
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3101
 
 // Security middleware
 app.use(helmet())
@@ -63,7 +63,7 @@ app.post('/upload', uploadLimiter, upload.single('file'), async (req, res) => {
         const timestamp = Date.now()
         const originalName = req.file.originalname
         const extension = originalName.split('.').pop()
-        
+
         let fileName
         if (req.body.customFileName) {
             // Use custom filename from frontend, ensure it has proper extension
