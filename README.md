@@ -103,6 +103,8 @@ npm run pm2:restart
 
 Returns the service status.
 
+**Deployed URL:** `https://endpoint.d.buzz/api/v1/image/health` (nginx routes `/api/v1/image/` to the service)
+
 **Response:**
 
 ```json
@@ -117,6 +119,8 @@ Returns the service status.
 **POST** `/upload`
 
 Uploads an image to Backblaze B2 and returns a preview URL.
+
+**Deployed URL:** `https://endpoint.d.buzz/api/v1/image/upload` (nginx routes `/api/v1/image/` to the service)
 
 **Request:**
 
@@ -156,8 +160,16 @@ Uploads an image to Backblaze B2 and returns a preview URL.
 ### cURL
 
 ```bash
+# Using original endpoint
 curl -X POST \
   http://localhost:3000/upload \
+  -H 'Content-Type: multipart/form-data' \
+  -F 'file=@/path/to/your/image.jpg' \
+  -F 'customFileName=my-custom-name'
+
+# Using versioned endpoint (for deployed environments)
+curl -X POST \
+  https://endpoint.d.buzz/api/v1/image/upload \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@/path/to/your/image.jpg' \
   -F 'customFileName=my-custom-name'
